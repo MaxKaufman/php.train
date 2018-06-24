@@ -2,7 +2,7 @@
 
 include 'INewsDB.class.php';
 
-class NewsDB implements INewsDB
+class NewsDB
 {
     const DB_NAME = "D:\OpenServer\OSPanel\domains\specialist\my.db";
 
@@ -46,6 +46,24 @@ class NewsDB implements INewsDB
 
     function saveNews($title, $category, $description, $source)
     {
+        $dt = time();
+        $sql = "INSERT INTO msgs (title, category, description, source) VALUES(:title, :category, :description, :source, $dt )";
+        $stmt = $this->_db->prepare($sql);
+        $stmt->bindParam(':title', $title = 'Книгк 44');
+        $stmt->bindParam(':category', $category = 'Философия');
+        $stmt->bindParam(':description', $description = 'Блабла-интересная книга');
+        $stmt->bindParam(':source', $source = 'сурс и прочее');
+        $stmt->execute();
+        $stmt->close();
+
+        if( $this->_db->lastErrorCode() > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
 
     }
 
