@@ -23,13 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <h1>Последние новости</h1>
 <?php
-
 if (count($errors) > 0) {
     foreach ($errors as $error) {
         echo "<p> $error </p>";
     }
 }
-
 ?>
 <form action="news.php" method="POST">
     <p>Заголовок</p>
@@ -52,6 +50,10 @@ if (count($errors) > 0) {
     </p>
     <p><input type="submit"></p>
 </form>
+
+<?php
+include 'get_news.inc.php';
+?>
 
 </body>
 </html>

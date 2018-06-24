@@ -69,6 +69,26 @@ class NewsDB
 
     function getNews()
     {
+        $sql = "SELECT msgs.id as id, 
+                title, 
+                category.name as category,
+                description,
+                source,
+                datetime
+                FROM msgs, category
+                WHERE category.id = msgs.category
+                ORDER BY bsgs.is DESC";
+
+        $result = $this->_db->query($sql);
+
+        if( $this->_db->lastErrorCode() == 0 ) {
+            while ($rows[] = $result->fetchArray(SQLITE3_ASSOC));
+            return $rows;
+        } else {
+            return false;
+        }
+
+
 
     }
 

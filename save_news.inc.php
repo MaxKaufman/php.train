@@ -16,7 +16,7 @@ foreach ($params as $_param => $type) {
 
     if (empty($validParam[$_param])) {
         $flag = false;
-        $errors[] = "Заполните {$validParam[$_param]}";
+        $errors[] = "Заполните {$_param}";
     }
 
 }
