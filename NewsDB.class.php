@@ -47,12 +47,12 @@ class NewsDB
     function saveNews($title, $category, $description, $source)
     {
         $dt = time();
-        $sql = "INSERT INTO msgs (title, category, description, source) VALUES(:title, :category, :description, :source, $dt )";
+        $sql = "INSERT INTO msgs (title, category, description, source, datetime) VALUES(:title, :category, :description, :source, $dt )";
         $stmt = $this->_db->prepare($sql);
-        $stmt->bindParam(':title', $title = 'Книгк 44');
-        $stmt->bindParam(':category', $category = 'Философия');
-        $stmt->bindParam(':description', $description = 'Блабла-интересная книга');
-        $stmt->bindParam(':source', $source = 'сурс и прочее');
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':source', $source );
         $stmt->execute();
         $stmt->close();
 

@@ -24,20 +24,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h1>Последние новости</h1>
 <?php
 
-if( count($errors) > 0 )
-{
-    foreach ($errors as $error)
-    {
+if (count($errors) > 0) {
+    foreach ($errors as $error) {
         echo "<p> $error </p>";
     }
 }
 
 ?>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="news.php" method="POST">
     <p>Заголовок</p>
-    <p><input type="text" name="title"></p>
+    <p>
+        <input type="text" name="title">
+    </p>
     <p>Выберите категорию:</p>
-    <p><input type="select"></input></p>
+    <p>
+        <select type="select" name="category">
+            <option value="1">Политика</option>
+            <option value="2">Философия</option>
+            <option value="3">Гастрономия</option>
+        </select>
+    </p>
+    <p>
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    </p>
+    <p>
+        <input type="text" name="source">
+    </p>
+    <p><input type="submit"></p>
 </form>
 
 </body>
