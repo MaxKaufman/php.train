@@ -4,11 +4,12 @@ include "autoload.php";
 
 $news = new NewsDB();
 $errors = [];
-
+include "functions/delete_news.inc.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include "save_news.inc.php";
 
 }
+
 
 ?>
 <!doctype html>
@@ -19,8 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
 <h1>Последние новости</h1>
 <?php
 if (count($errors) > 0) {
@@ -54,6 +57,6 @@ if (count($errors) > 0) {
 <?php
 include 'get_news.inc.php';
 ?>
-
+</div>
 </body>
 </html>
