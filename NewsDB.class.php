@@ -4,7 +4,7 @@ include 'INewsDB.class.php';
 
 class NewsDB
 {
-    const DB_NAME = "D:\OpenServer\OSPanel\domains\specialist\my.db";
+    const DB_NAME = "D:\OpenServer\OSPanel\domains\php.train\my.db";
 
     private $_db = null;
 
@@ -30,12 +30,11 @@ class NewsDB
                 UNION SELECT 2 as id, 'Культура' as name
                 UNION SELECT 3 as id, 'Спорт' as name"
             ];
-            foreach ($queries as $query)
-            {
+            foreach ($queries as $query) {
                 $this->_db->exec($query);
             }
         } else {
-             $this->_db = new SQLite3(self::DB_NAME);
+            $this->_db = new SQLite3(self::DB_NAME);
         }
     }
 
@@ -52,16 +51,13 @@ class NewsDB
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':source', $source );
+        $stmt->bindParam(':source', $source);
         $stmt->execute();
         $stmt->close();
 
-        if( $this->_db->lastErrorCode() > 0)
-        {
+        if ($this->_db->lastErrorCode() > 0) {
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
 
@@ -77,28 +73,33 @@ class NewsDB
                 datetime
                 FROM msgs, category
                 WHERE category.id = msgs.category
-                ORDER BY bsgs.is DESC";
+                ORDER BY msgs.id DESC";
 
         $result = $this->_db->query($sql);
 
-        if( $this->_db->lastErrorCode() == 0 ) {
-            while ($rows[] = $result->fetchArray(SQLITE3_ASSOC));
+        if ($this->_db->lastErrorCode() == 0) {
+            while ($rows[] = $result->fetchArray(SQLITE3_ASSOC)) ;
             return $rows;
         } else {
             return false;
         }
 
 
-
     }
 
-    function deleteNews()
+    function deleteNews($id)
     {
-
+        $sql = "DELETE FROM msgs WHERE(id = $id)";
+        $result = $this->_db->query($sql);
+        if ($this->_db->lastErrorCode() > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
-
-$news = new NewsDB();
+/*
+$news = new NewsDB();*/
 
 
 ?>
